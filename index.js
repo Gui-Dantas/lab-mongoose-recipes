@@ -19,6 +19,38 @@ const manageRecipes = async () => {
     await Recipe.deleteMany();
 
     // Run your code here, after you have insured that the connection was made
+    
+    // Iteration 2 Create Recipe
+    let cozido = {
+      title: 'Cozido', 
+      level: 'Easy Peasy',  
+      ingredients: ['carnes', 'enchidos', 'feijão', 'arroz'], 
+      cuisine: 'Portuguese', 
+      dishType: 'main_course',  
+      image:'https://www.pingodoce.pt/wp-content/uploads/2015/03/cozido-a-portuguesa-617.jpg', 
+      duration: 180,
+      creator: 'Povo Português'
+    };
+     const recipe = await Recipe.create(cozido);
+     console.log(recipe);
+
+    //Iteration 3 - Insert multiple recipes
+    let allRecipes = await Recipe.insertMany(data);
+    console.log(allRecipes);
+
+    //Iteration 4 - Update recipe
+    let updateRecipe = await Recipe.findOneAndUpdate({ title: 'Rigatoni alla Genovese'}, {duration:100});
+    console.log(updateRecipe);
+    console.log('Success');
+
+    //Iteration 5 - Remove a recipe
+    let deleteRecipe = await Recipe.deleteOne({title:"carrotCake"});
+    console.log(deleteRecipe);
+
+    //Iteration 6 - Close the Database
+    mongoose.disconnect();
+
+
   } catch (error) {
     console.log(error);
   }
